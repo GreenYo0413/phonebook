@@ -41,7 +41,8 @@ int main(int argc, char *argv[])
     pHead = (entry *) malloc(sizeof(entry));
     printf("size of entry : %lu bytes\n", sizeof(entry));
     e = pHead;
-    e->pNext = NULL;
+//if(strcmp(IMPL,"phonebook_orig.h")==0)
+  //  e->pNext = NULL;
 
 #if defined(__GNUC__)
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
@@ -52,7 +53,10 @@ int main(int argc, char *argv[])
             i++;
         line[i - 1] = '\0';
         i = 0;
-        e = append(line, e);
+	if(strcmp(IMPL,"phonebook_orig.h")==0)
+            e = append(line, e);
+	else if(strcmp(IMPL,"phonebook_opt.h")==0)
+	    e = append(line, pHead);
     }
     clock_gettime(CLOCK_REALTIME, &end);
     cpu_time1 = diff_in_second(start, end);
@@ -68,17 +72,23 @@ int main(int argc, char *argv[])
 
     assert(findName(input, e) &&
            "Did you implement findName() in " IMPL "?");
-    assert(0 == strcmp(findName(input, e)->lastName, "zyxel"));
+//if(strcmp(IMPL,"phonebook_orig.h")==0)
+  //  assert(0 == strcmp(findName(input, e)->lastName, "zyxel"));
 
 #if defined(__GNUC__)
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
 #endif
+    entry *a;
     /* compute the execution time */
     clock_gettime(CLOCK_REALTIME, &start);
-    findName(input, e);
+    a=findName(input, e);
     clock_gettime(CLOCK_REALTIME, &end);
     cpu_time2 = diff_in_second(start, end);
-
+    
+    if(a==NULL)
+	printf("not found!!\n");
+    else
+	printf("found\n");
     printf("execution time of append() : %lf sec\n", cpu_time1);
     printf("execution time of findName() : %lf sec\n", cpu_time2);
 
