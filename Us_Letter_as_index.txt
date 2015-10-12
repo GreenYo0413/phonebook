@@ -1,0 +1,14 @@
+# started on Mon Oct 12 21:25:19 2015
+
+
+ Performance counter stats for './phonebook_opt' (10 runs):
+
+         3,570,597      cache-misses              #   83.288 % of all cache refs      ( +-  0.54% ) [66.57%]
+         4,287,074      cache-references                                              ( +-  0.45% ) [67.00%]
+         5,058,611      L1-dcache-load-misses                                         ( +-  0.47% ) [67.42%]
+         4,501,532      L1-dcache-store-misses                                        ( +-  0.33% ) [68.06%]
+           786,034      L1-dcache-prefetch-misses                                     ( +- 11.63% ) [66.80%]
+           281,346      L1-icache-load-misses                                         ( +-  3.85% ) [65.73%]
+
+       0.172255920 seconds time elapsed                                          ( +-  7.31% )
+

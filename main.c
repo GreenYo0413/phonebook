@@ -41,8 +41,7 @@ int main(int argc, char *argv[])
     pHead = (entry *) malloc(sizeof(entry));
     printf("size of entry : %lu bytes\n", sizeof(entry));
     e = pHead;
-//if(strcmp(IMPL,"phonebook_orig.h")==0)
-  //  e->pNext = NULL;
+    e->pNext = NULL;
 
 #if defined(__GNUC__)
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
@@ -53,10 +52,7 @@ int main(int argc, char *argv[])
             i++;
         line[i - 1] = '\0';
         i = 0;
-	if(strcmp(IMPL,"phonebook_orig.h")==0)
-            e = append(line, e);
-	else if(strcmp(IMPL,"phonebook_opt.h")==0)
-	    e = append(line, pHead);
+        e = append(line, e);
     }
     clock_gettime(CLOCK_REALTIME, &end);
     cpu_time1 = diff_in_second(start, end);
@@ -72,8 +68,7 @@ int main(int argc, char *argv[])
 
     assert(findName(input, e) &&
            "Did you implement findName() in " IMPL "?");
-//if(strcmp(IMPL,"phonebook_orig.h")==0)
-  //  assert(0 == strcmp(findName(input, e)->lastName, "zyxel"));
+    assert(0 == strcmp(findName(input, e)->lastName, "zyxel"));
 
 #if defined(__GNUC__)
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));

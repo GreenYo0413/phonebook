@@ -2,50 +2,28 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
 #include "phonebook_opt.h"
 
-/* FILL YOUR OWN IMPLEMENTATION HERE! */
-entry *findName(char lastname[], entry *e)
+entry *findName(char lastname[], entry *pHead)
 {
-
-	int len=strlen(lastname);
-        int i=0;
-        int index;
-        while(i<len){
-                index=(lastname[i]>=97)?(lastname[i]-97):(lastname[i]-65);
-                if(e->pLastNameLetter[index]==NULL){
-                        e->pLastNameLetter[index]=(entry*)malloc(sizeof(entry));
-                        e->pLastNameLetter[index]->pdata=NULL;
-                }
-                e=e->pLastNameLetter[index];
-                i++;
-        }
-
-        if(e->pdata==NULL){
-                return NULL;
-        }
-	else{
-		return e;
-	}
+    while (pHead != NULL) {
+        if (strcasecmp(lastname, pHead->lastName) == 0)
+            return pHead;
+        pHead = pHead->pNext;
+    }
+    return NULL;
 }
 
 entry *append(char lastName[], entry *e)
 {
-	int len=strlen(lastName);
-	int i=0;
-	int index;
-	while(i<len){
-		index=(lastName[i]>=97)?(lastName[i]-97):(lastName[i]-65);
-		if(e->pLastNameLetter[index]==NULL){
-			e->pLastNameLetter[index]=(entry*)malloc(sizeof(entry));
-			e->pLastNameLetter[index]->pdata=NULL;
-		}
-		e=e->pLastNameLetter[index];
-		i++;
-	}
-	
-	if(e->pdata==NULL){
-		e->pdata=(dataLink*)malloc(sizeof(dataLink));
-	}
+    /* allocate memory for the new entry and put lastName */
+    e->pNext = (entry *) malloc(sizeof(entry));
+    
+    e = e->pNext;
+//    e->detail =(detailLink*)malloc(sizeof(detailLink));
+    strcpy(e->lastName, lastName);
+    e->pNext = NULL;
+
     return e;
 }
