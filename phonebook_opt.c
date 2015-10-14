@@ -19,7 +19,7 @@ entry *append(char lastName[], entry *e)
 {
     /* allocate memory for the new entry and put lastName */
     e->pNext = (entry *) malloc(sizeof(entry));
-    
+
     e = e->pNext;
 //    e->detail =(detailLink*)malloc(sizeof(detailLink));
     strcpy(e->lastName, lastName);

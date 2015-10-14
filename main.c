@@ -73,17 +73,12 @@ int main(int argc, char *argv[])
 #if defined(__GNUC__)
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
 #endif
-    entry *a;
     /* compute the execution time */
     clock_gettime(CLOCK_REALTIME, &start);
     a=findName(input, e);
     clock_gettime(CLOCK_REALTIME, &end);
     cpu_time2 = diff_in_second(start, end);
-    
-    if(a==NULL)
-	printf("not found!!\n");
-    else
-	printf("found\n");
+
     printf("execution time of append() : %lf sec\n", cpu_time1);
     printf("execution time of findName() : %lf sec\n", cpu_time2);
 
